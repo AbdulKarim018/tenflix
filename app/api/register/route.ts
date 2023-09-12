@@ -29,7 +29,7 @@ export async function POST(req: Request) {
             { name: "Profile #2", image: '/profile-red-2.png' },
             { name: "Profile #3", image: '/profile-slate-3.png' },
             { name: "Profile #4", image: '/profile-green-4.png' },
-            { name: "Kids' Profile", image: '/profile-kids-5.png' },
+            { name: "Kids", image: '/profile-kids-5.png' },
           ]
         }
       }
