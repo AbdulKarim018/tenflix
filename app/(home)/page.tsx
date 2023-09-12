@@ -4,11 +4,6 @@ import SignOutButton from "@/components/signOutButton";
 import { Metadata } from "next";
 
 
-export const metadata: Metadata = {
-  title: 'Tenflix - An Awesome Streaming Service!',
-  description: 'An Awesome Streaming Service!',
-}
-
 
 export default async function Home() {
 
