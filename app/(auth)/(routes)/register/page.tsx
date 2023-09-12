@@ -44,7 +44,7 @@ export default function RegisterPage() {
 			toast.error("Something Bad Happened :(")
 			console.log(error);
 		}
-	}, [name, email, password])
+	}, [name, email, password, router])
 	if (session) {
 		router.push('/profiles');
 	}
