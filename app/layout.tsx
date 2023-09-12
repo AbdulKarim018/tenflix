@@ -1,4 +1,3 @@
-'use client'
 import AuthProvider from '@/contexts/AuthProvider'
 import './globals.css'
 import type { Metadata } from 'next'
