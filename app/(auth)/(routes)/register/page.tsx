@@ -4,10 +4,10 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Lilita_One } from 'next/font/google'
 import Logo from '@/components/Logo'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useCallback, useState } from 'react'
 import axios from "axios";
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { AiOutlineLoading } from 'react-icons/ai'
 import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast';
@@ -37,7 +37,7 @@ export default function RegisterPage() {
 				}, 1500);
 			}).catch((error) => {
 				setIsSubmitting(false);
-				const msg = error.response.data;
+				const msg = error.response.data.msg;
 				toast.error(msg);
 			})
 		} catch (error) {

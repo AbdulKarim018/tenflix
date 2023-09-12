@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
 import prismadb from '@/lib/prismadb';
 
-export async function handler(req: Request) {
+export async function POST(req: Request) {
   const body = await req.json()
   try {
     const { name, email, password } = body as { name: string, email: string, password: string }
@@ -12,10 +12,10 @@ export async function handler(req: Request) {
       }
     })
     if (existingUser) {
-      return NextResponse.json("Email is already in use!", { status: 400 })
+      return NextResponse.json({ msg: "Email is already in use!" }, { status: 400 })
     };
     if (!name || !email || !password) {
-      return NextResponse.json("Fields Cannot be Empty", { status: 400 });
+      return NextResponse.json({ msg: "Fields Cannot be Empty" }, { status: 400 });
     }
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await prismadb.user.create({
@@ -38,9 +38,7 @@ export async function handler(req: Request) {
     // return NextResponse.json({ name, email, password }, { status: 201 })
   } catch (error) {
     console.log(error)
-    return NextResponse.json(`Someting Went Wrong :(`, { status: 400 })
+    return NextResponse.json({ msg: `Someting Went Wrong :(` }, { status: 400 })
   }
 
 };
-
-export { handler as POST };
