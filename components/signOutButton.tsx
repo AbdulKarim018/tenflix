@@ -4,7 +4,7 @@ import { Button } from './ui/button'
 import signOutAndClearCookies from '@/lib/utils/signOutAndClearCookies'
 import { useSession } from 'next-auth/react'
 
-export default function SignOutButton() {
+export function SignOutButton() {
     const { data: session } = useSession()
     return (
         <>
