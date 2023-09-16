@@ -1,8 +1,8 @@
-import AuthProvider from '@/contexts/AuthProvider'
+import AuthProvider from '@/hooks/contexts/AuthProvider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@/contexts/ThemeProvider'
+import { ThemeProvider } from '@/hooks/contexts/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 

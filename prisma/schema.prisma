@@ -20,6 +20,7 @@ model User {
   updatedAt       DateTime  @updatedAt
   session         Session[]
   Profiles        Profile[]
+  favoriteIds     String[]  @db.ObjectId
 }
 
 model Profile {
@@ -47,4 +48,14 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Movie {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  videoUrl     String
+  thumbnailUrl String
+  genre        String
+  duration     String
 }
