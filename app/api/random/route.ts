@@ -13,7 +13,5 @@ export async function GET(req: Request) {
     skip: randomMovieNumber,
   })
 
-  console.log("Route Accessed!");
-
   return NextResponse.json(randomMovie[0]);
 }

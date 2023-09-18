@@ -44,10 +44,10 @@ export default function Navbar() {
 
   return (
     <nav className='z-10 fixed'>
-      <div className={`text-white fixed px-2 transition flex w-full ${showBackground ? 'bg-zinc-800/80' : 'bg-transparent'}`}>
+      <div className={`text-white fixed p-2 transition flex w-full ${showBackground ? 'bg-zinc-800/80' : 'bg-transparent'}`}>
         {/* sheet */}
         <Sheet>
-          <SheetTrigger className='lg:hidden ml-4 mr-5 '><GiHamburgerMenu /></SheetTrigger>
+          <SheetTrigger aria-label='open mobile menu' className='lg:hidden ml-4 mr-5 '><GiHamburgerMenu /></SheetTrigger>
           <SheetContent side='left' className='w-[17rem] bg-slate-900/20 backdrop:bg-black'>
             <SheetHeader>
               <SheetTitle>Navigation Menu</SheetTitle>
@@ -78,7 +78,7 @@ export default function Navbar() {
         </Sheet>
 
         <div>
-          <Image src='/logo2.png' alt='TENFLIX logo' width={130} height={100} />
+          <Image priority={true} src='/logo2.png' alt='TENFLIX logo' width={130} height={100} />
         </div>
         <div className="flex w-full justify-end">
           <div className="max-lg:hidden flex w-full justify-end">

@@ -17,10 +17,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <AuthProvider>
         <body className={`${inter.className} bg-black`}>
-          <ThemeProvider defaultTheme='dark' attribute='class'>
+          <ThemeProvider defaultTheme='dark' attribute="class">
             {children}
           </ThemeProvider>
         </body>

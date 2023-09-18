@@ -1,8 +1,10 @@
 "use client"
 
 import { Movie } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Montserrat } from 'next/font/google'
+import { FaPlay } from "react-icons/fa";
+import { BsFillBookmarkPlusFill } from "react-icons/bs";
 const montserrat = Montserrat({
   subsets: ['latin'],
 });
@@ -10,13 +12,13 @@ const montserrat = Montserrat({
 const BillBoard = () => {
   const [data, setData] = useState<Movie>()
 
-  const randomMovieFetcher = async () => {
+  const randomMovieFetcher = useCallback(async () => {
     const response = await fetch(`/api/random`, {
       next: { revalidate: 300 },
     })
     const movie = await response.json();
     setData(movie);
-  }
+  }, [])
 
   useEffect(() => {
     randomMovieFetcher();
@@ -29,21 +31,37 @@ const BillBoard = () => {
 
   return (
     <>
-      <div className="relative h-[50vw]">
-        <video src={data?.videoUrl} poster={data?.thumbnailUrl} autoPlay loop muted className="w-full lg:h-[50vw] h-[200vw] object-cover brightness-50 -z-10 blur-sm"></video>
+      <div className="relative lg:h-[50vw] h-[200vw]">
+        <video onContextMenu={(e) => {
+          e.preventDefault();
+        }}
+          src={data?.videoUrl}
+          poster={data?.thumbnailUrl}
+          autoPlay loop muted
+          className="w-full lg:h-[50vw] h-[200vw] object-cover brightness-50"></video>
       </div>
       <div className="absolute lg:top-[35%] lg:w-[35vw] top-[25%] w-[10rem] justify-start ml-10">
         <div className="flex flex-col justify-start h-full">
           <div className={`text-white text-4xl font-bold mb-4 ${montserrat.className}`}>{data?.title}</div>
           <div className="text-white text-sm">{data?.description}</div>
         </div>
+        <div className="mt-10 flex gap-4">
+          <button className="flex items-center transition
+           bg-slate-600 hover:bg-slate-800 border-2 border-transparent hover:border-white
+            cursor-pointer rounded-lg
+            lg:h-[3rem] lg:p-4 p-2 h-10 lg:text-base text-sm">
+            Add&nbsp;to&nbsp;My&nbsp;List
+            <span className="ml-2"><BsFillBookmarkPlusFill /></span>
+          </button>
+          <button className="flex items-center transition
+           bg-red-600 hover:bg-red-800 border-2 border-transparent hover:border-white
+            cursor-pointer 
+            rounded-lg lg:h-[3rem] p-2 h-10 lg:text-base text-sm"
+          >Watch&nbsp;Now
+            <span className="ml-2"><FaPlay /></span>
+          </button>
+        </div>
       </div>
-
-      <div className="h-[900vh]"></div>
-      <div className="h-[900vh]"></div>
-      <div className="h-[900vh]"></div>
-      <div className="h-[900vh]"></div>
-      <div className="h-[900vh]"></div>
     </>
   )
 }
