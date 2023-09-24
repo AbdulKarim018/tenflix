@@ -1,32 +1,18 @@
 "use client"
 
-import { Movie } from "@prisma/client";
-import { useCallback, useEffect, useState } from "react";
 import { Montserrat } from 'next/font/google'
 import { FaPlay } from "react-icons/fa";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
+import useRandomMovieFetcher from '@/hooks/useRandomMovieFetcher';
+import { Movie } from '@prisma/client';
 const montserrat = Montserrat({
   subsets: ['latin'],
 });
 
 const BillBoard = () => {
-  const [data, setData] = useState<Movie>()
 
-  const randomMovieFetcher = useCallback(async () => {
-    const response = await fetch(`/api/random`, {
-      next: { revalidate: 300 },
-    })
-    const movie = await response.json();
-    setData(movie);
-  }, [])
 
-  useEffect(() => {
-    randomMovieFetcher();
-
-    return () => {
-      randomMovieFetcher();
-    }
-  }, [])
+  const { data: movie }: { data: Movie } = useRandomMovieFetcher();
 
 
   return (
@@ -35,15 +21,15 @@ const BillBoard = () => {
         <video onContextMenu={(e) => {
           e.preventDefault();
         }}
-          src={data?.videoUrl}
-          poster={data?.thumbnailUrl}
+          src={movie?.videoUrl}
+          poster={movie?.thumbnailUrl}
           autoPlay loop muted
           className="w-full lg:h-[50vw] h-[200vw] object-cover brightness-50"></video>
       </div>
       <div className="absolute lg:top-[35%] lg:w-[35vw] top-[25%] w-[10rem] justify-start ml-10">
         <div className="flex flex-col justify-start h-full">
-          <div className={`text-white text-4xl font-bold mb-4 ${montserrat.className}`}>{data?.title}</div>
-          <div className="text-white text-sm">{data?.description}</div>
+          <div className={`text-white text-4xl font-bold mb-4 ${montserrat.className}`}>{movie?.title}</div>
+          <div className="text-white text-sm">{movie?.description}</div>
         </div>
         <div className="mt-10 flex gap-4">
           <button className="flex items-center transition

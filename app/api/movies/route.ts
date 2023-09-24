@@ -7,7 +7,8 @@ export const GET = async (req: Request) => {
   const movies = await prismadb.movie.findMany({
     orderBy: {
       createdAt: 'desc',
-    }
+    },
+    take: 6,
   });
 
   return NextResponse.json(movies);

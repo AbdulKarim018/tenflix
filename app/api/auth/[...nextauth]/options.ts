@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Incorrect Password!");
         };
-        console.log(user);
+        // console.log(user);
 
         return user;
       },

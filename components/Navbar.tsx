@@ -43,11 +43,11 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className='z-10 fixed'>
-      <div className={`text-white fixed p-2 transition flex w-full ${showBackground ? 'bg-zinc-800/80' : 'bg-transparent'}`}>
+    <nav className='z-30 fixed'>
+      <div className={`text-white fixed p-2 transition flex w-full h-16 lg:h-20 lg:px-10 px-3 ${showBackground ? 'bg-zinc-800/80' : 'bg-transparent'}`}>
         {/* sheet */}
         <Sheet>
-          <SheetTrigger aria-label='open mobile menu' className='lg:hidden ml-4 mr-5 '><GiHamburgerMenu /></SheetTrigger>
+          <SheetTrigger aria-label='open mobile menu' className='lg:hidden ml-4 mr-5 '><GiHamburgerMenu className="w-5 h-5" /></SheetTrigger>
           <SheetContent side='left' className='w-[17rem] bg-slate-900/20 backdrop:bg-black'>
             <SheetHeader>
               <SheetTitle>Navigation Menu</SheetTitle>
@@ -78,19 +78,19 @@ export default function Navbar() {
         </Sheet>
 
         <div>
-          <Image priority={true} src='/logo2.png' alt='TENFLIX logo' width={130} height={100} />
+          <Image priority={true} src='/logo2.png' alt='TENFLIX logo' width={100} height={80} />
         </div>
         <div className="flex w-full justify-end">
           <div className="max-lg:hidden flex w-full justify-end">
-            <NavItem label='Home' href='/' className='m-2 pt-4' />
-            <NavItem label='New & Popular' href='/new' className='m-2 p-4' />
-            <NavItem label='Browse By Categories' href='/categories' className='m-2 p-4' />
-            <NavItem label='Search' href='/search' className='m-2 p-4' />
+            <NavItem label='Home' href='/' className='m-2 p-4' />
+            <NavItem label='New & Popular' href='/new' className='m-2 p-4' disabled />
+            <NavItem label='Browse By Categories' href='/categories' className='m-2 p-4' disabled />
+            <NavItem label='Search' href='/search' className='m-2 p-4' disabled />
           </div>
-          {status === 'loading' && <div className='animate-none'><div className="animate-spin"><AiOutlineLoading /></div></div>}
-          {status === 'unauthenticated' && <Button className='rounded-3xl hover:bg-red-700 bg-red-600 text-black hover:text-white mt-2' size='lg'
+          {status === 'loading' && <AiOutlineLoading className="animate-spin w-6 h-6 mt-2" />}
+          {status === 'unauthenticated' && <Button className='rounded-3xl hover:bg-red-800 bg-red-600 text-black hover:text-white mt-2' size='lg'
             onClick={() => { router.push('/login') }}>
-            Sign&nbsp;In <div className="ml-2"><HiArrowRight /></div>
+            Sign&nbsp;In <HiArrowRight className="m-2" />
           </Button>}
           {status === 'authenticated' && <NavBarDropdownWithAvatar image={session?.user?.Profiles[profileNumber || 0].image} email={session.user.email} name={session.user.Profiles[profileNumber || 0].name} />}
         </div>

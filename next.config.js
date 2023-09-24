@@ -32,6 +32,12 @@ const nextConfig = {
         port: '',
         pathname: '/assets/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'w0.peakpx.com',
+        port: '',
+        pathname: '/wallpaper/367/662/**',
+      },
     ],
   },
 }
