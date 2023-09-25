@@ -4,7 +4,6 @@ import { Montserrat } from 'next/font/google'
 import { FaPlay } from "react-icons/fa";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
 import useRandomMovieFetcher from '@/hooks/useRandomMovieFetcher';
-import { Movie } from '@prisma/client';
 const montserrat = Montserrat({
   subsets: ['latin'],
 });
@@ -12,7 +11,7 @@ const montserrat = Montserrat({
 const BillBoard = () => {
 
 
-  const { data: movie }: { data: Movie } = useRandomMovieFetcher();
+  const { data: movie } = useRandomMovieFetcher();
 
 
   return (

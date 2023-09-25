@@ -2,8 +2,7 @@
 
 import useAllMoviesFetcher from '@/hooks/useAllMoviesFetcher'
 import { Movie } from '@prisma/client'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { AiOutlineLoading } from 'react-icons/ai'
 
 const MovieList = () => {
@@ -21,7 +20,7 @@ const MovieList = () => {
           <div className="rounded-md overflow-hidden shadow-lg
            bg-slate-900/20 backdrop:bg-black"
             key={movie.id}>
-            <Image src={movie.thumbnailUrl} alt={movie.title}
+            <img src={movie.thumbnailUrl} alt={movie.title}
               width={300} height={300}
               className='lg:w-[20rem] lg:h-[10rem] w-[60vw] h-[10rem] object-cover' />
           </div>
