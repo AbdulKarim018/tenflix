@@ -1,9 +1,7 @@
 import prismadb from '@/lib/prismadb';
 import { NextResponse } from "next/server"
 
-export const GET = async (req: Request) => {
-
-
+export const POST = async (req: Request) => {
   const movies = await prismadb.movie.findMany({
     orderBy: {
       createdAt: 'desc',

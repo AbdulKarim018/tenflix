@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NavItem from './NavItem'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
@@ -20,15 +20,15 @@ import { FaHome } from 'react-icons/fa';
 import { BiSolidCategoryAlt, BiSolidVideos } from 'react-icons/bi';
 import { BsSearch } from 'react-icons/bs';
 import { AiOutlineLoading } from 'react-icons/ai'
+import { ProfileContext } from '@/hooks/contexts/ProfileContext'
 
 
 export default function Navbar() {
   const [showBackground, setShowBackground] = useState(false);
-  const searchParams = useSearchParams();
-  const profile = searchParams.get('profile') ?? 0
-  const profileNumber = Number.parseInt(profile || '')
   const router = useRouter();
   const { data: session, status } = useSession();
+  const { profile } = useContext(ProfileContext);
+  status === 'authenticated' && profile === undefined && router.push('/profiles')
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 66) {
@@ -61,15 +61,15 @@ export default function Navbar() {
                   </div>
                   <div className="flex m-2 pt-6">
                     <div className="mt-1"><BiSolidVideos /></div>
-                    <NavItem label='New & Popular' href='/new' className='ml-2' />
+                    <NavItem label='New & Popular' href='/' className='ml-2' disabled />
                   </div>
                   <div className="flex m-2 pt-6">
                     <div className="mt-1"><BiSolidCategoryAlt /></div>
-                    <NavItem label='Browse&nbsp;By&nbsp;Categories' href='/categories' className='ml-2' />
+                    <NavItem label='Browse&nbsp;By&nbsp;Categories' href='/' className='ml-2' disabled />
                   </div>
                   <div className="flex m-2 pt-6">
                     <div className="mt-1"><BsSearch /></div>
-                    <NavItem label='Search' href='/search' className='ml-2' />
+                    <NavItem label='Search' href='/' className='ml-2' disabled />
                   </div>
                 </div>
               </SheetDescription>
@@ -83,18 +83,23 @@ export default function Navbar() {
         <div className="flex w-full justify-end">
           <div className="max-lg:hidden flex w-full justify-end">
             <NavItem label='Home' href='/' className='m-2 p-4' />
-            <NavItem label='New & Popular' href='/new' className='m-2 p-4' disabled />
-            <NavItem label='Browse By Categories' href='/categories' className='m-2 p-4' disabled />
-            <NavItem label='Search' href='/search' className='m-2 p-4' disabled />
+            <NavItem label='New & Popular' href='/' className='m-2 p-4' disabled />
+            <NavItem label='Browse By Categories' href='/' className='m-2 p-4' disabled />
+            <NavItem label='Search' href='/' className='m-2 p-4' disabled />
           </div>
           {status === 'loading' && <AiOutlineLoading className="animate-spin w-6 h-6 mt-2" />}
           {status === 'unauthenticated' && <Button className='rounded-3xl hover:bg-red-800 bg-red-600 text-black hover:text-white mt-2' size='lg'
             onClick={() => { router.push('/login') }}>
             Sign&nbsp;In <HiArrowRight className="m-2" />
           </Button>}
-          {status === 'authenticated' && <NavBarDropdownWithAvatar image={session?.user?.Profiles[profileNumber || 0].image} email={session.user.email} name={session.user.Profiles[profileNumber || 0].name} />}
+          {status === 'authenticated' && profile !== undefined && <NavBarDropdownWithAvatar image={session?.user?.Profiles[profile].image} email={session.user.email} name={session.user.Profiles[profile].name} />}
         </div>
       </div>
     </nav>
   )
 }
+
+
+
+
+{/* <NavBarDropdownWithAvatar image={session?.user?.Profiles[profile].image} email={session.user.email} name={session.user.Profiles[profile].name} /> */ }

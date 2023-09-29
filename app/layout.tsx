@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/hooks/contexts/ThemeProvider'
+import { ProfileContextProvider } from '@/hooks/contexts/ProfileContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,9 @@ export default function RootLayout({
       <AuthProvider>
         <body className={`${inter.className} bg-black`}>
           <ThemeProvider defaultTheme='dark' attribute="class">
-            {children}
+            <ProfileContextProvider>
+              {children}
+            </ProfileContextProvider>
           </ThemeProvider>
         </body>
       </AuthProvider>
