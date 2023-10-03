@@ -16,7 +16,7 @@ export default function NavBarDropdownWithAvatar({ name, email, image }: { image
         <Avatar className='cursor-pointer mt-2 border-blue-900 border-4'>
           <AvatarImage src={image ?? '/user-placeholder.png'} />
           <AvatarFallback className='bg-black'>
-            <AiOutlineLoading className="animate-spin w-2 h-2" />
+            <AiOutlineLoading className="animate-spin w-2 h-2 duration-500" />
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

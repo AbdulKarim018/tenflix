@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import NavItem from './NavItem'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import NavBarDropdownWithAvatar from './NavBarDropdownWithAvatar'
 import { Button } from './ui/button'
 import { HiArrowRight } from 'react-icons/hi'
@@ -87,7 +87,7 @@ export default function Navbar() {
             <NavItem label='Browse By Categories' href='/' className='m-2 p-4' disabled />
             <NavItem label='Search' href='/' className='m-2 p-4' disabled />
           </div>
-          {status === 'loading' && <AiOutlineLoading className="animate-spin w-6 h-6 mt-2" />}
+          {status === 'loading' && <AiOutlineLoading className="animate-spin w-6 h-6 mt-2 duration-500" />}
           {status === 'unauthenticated' && <Button className='rounded-3xl hover:bg-red-800 bg-red-600 text-black hover:text-white mt-2' size='lg'
             onClick={() => { router.push('/login') }}>
             Sign&nbsp;In <HiArrowRight className="m-2" />

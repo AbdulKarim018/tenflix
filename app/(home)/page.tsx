@@ -11,12 +11,10 @@ export default async function Home() {
 
   return (
     <>
-      <div className="">
-        <Navbar />
-        <BillBoard />
-        <MovieList />
-        <DeleteUserButton />
-      </div>
+      <Navbar />
+      <BillBoard />
+      <MovieList />
+      <DeleteUserButton />
     </>
   )
 }

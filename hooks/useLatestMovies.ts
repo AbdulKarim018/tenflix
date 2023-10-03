@@ -2,9 +2,9 @@ import useSWR from 'swr';
 
 
 
-const fetcher = (url: URL) => fetch(url, { method: 'POST' }).then(r => r.json());
+const fetcher = (url: URL) => fetch(url).then(r => r.json());
 
-export const useAllMoviesFetcher = () => {
+export const useLatestMovies = () => {
   const { data, error, isLoading } = useSWR('/api/movies', fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
@@ -13,4 +13,4 @@ export const useAllMoviesFetcher = () => {
   return { data, error, isLoading };
 }
 
-export default useAllMoviesFetcher;
+export default useLatestMovies;

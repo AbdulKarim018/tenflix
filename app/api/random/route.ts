@@ -1,8 +1,8 @@
 import prismadb from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
-
-export async function POST(req: Request) {
+export const revalidate = 10;
+export async function GET(req: Request) {
 
   const movieCount = await prismadb.movie.count();
 

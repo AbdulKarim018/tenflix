@@ -3,7 +3,7 @@
 import { Montserrat } from 'next/font/google'
 import { FaPlay } from "react-icons/fa";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
-import useRandomMovieFetcher from '@/hooks/useRandomMovieFetcher';
+import useRandomMovie from '@/hooks/useRandomMovie';
 const montserrat = Montserrat({
   subsets: ['latin'],
 });
@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 const BillBoard = () => {
 
 
-  const { data: movie } = useRandomMovieFetcher();
+  const { data: movie } = useRandomMovie();
 
 
   return (
