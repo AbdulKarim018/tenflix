@@ -14,7 +14,7 @@ const MovieList = () => {
   return (
     <>
       <Toaster />
-      <div className='p-4'>
+      <section className='p-4'>
         <h2 className='text-2xl text-bold py-5 px-4 font-bold cursor-default'>
           New on <span className='font-semibold text-red-700'>TENFLIX</span>
         </h2>
@@ -25,7 +25,7 @@ const MovieList = () => {
             <MovieCard movie={movie} key={movie.id} />
           ))}
         </div>}
-      </div>
+      </section>
     </>
   )
 }

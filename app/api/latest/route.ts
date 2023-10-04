@@ -1,7 +1,7 @@
 import prismadb from '@/lib/prismadb';
 import { NextResponse } from "next/server"
 
-export const revalidate = 10;
+export const revalidate = 300;
 export const GET = async (req: Request) => {
   const movies = await prismadb.movie.findMany({
     orderBy: {
