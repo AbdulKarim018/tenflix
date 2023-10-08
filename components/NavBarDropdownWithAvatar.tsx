@@ -1,11 +1,10 @@
+"use client"
 import { AiOutlineLoading } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { CreditCard, LogOut, User } from "lucide-react";
-import { signOut } from "next-auth/react";
-
-import React from 'react'
 import { useRouter } from "next/navigation";
+import signOutAndClearCookies from "@/lib/utils/signOutAndClearCookies";
 
 export default function NavBarDropdownWithAvatar({ name, email, image }: { image?: string | undefined | null, name: string | undefined | null, email: string | undefined | null; }) {
   const router = useRouter();
@@ -39,7 +38,7 @@ export default function NavBarDropdownWithAvatar({ name, email, image }: { image
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => {
-          signOut();
+          signOutAndClearCookies();
         }}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>

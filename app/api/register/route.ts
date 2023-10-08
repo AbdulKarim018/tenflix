@@ -3,7 +3,13 @@ import bcrypt from 'bcrypt';
 import prismadb from '@/lib/prismadb';
 
 export async function POST(req: Request) {
-  const body = await req.json()
+  const { data } = await req.json();
+  const body = {
+    name: data.name,
+    email: data.email.toLowerCase(),
+    password: data.password,
+  }
+
   try {
     const { name, email, password } = body as { name: string, email: string, password: string }
     const existingUser = await prismadb.user.findUnique({
