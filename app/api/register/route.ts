@@ -1,17 +1,16 @@
 import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
 import prismadb from '@/lib/prismadb';
+import { RegistrationSchema } from "@/lib/zodTypes";
 
 export async function POST(req: Request) {
-  const { data } = await req.json();
-  const body = {
-    name: data.name,
-    email: data.email.toLowerCase(),
-    password: data.password,
+  const { data }: { data: unknown } = await req.json();
+  const body = RegistrationSchema.safeParse(data);
+  if (!body.success) {
+    return NextResponse.json({ msg: body.error.message }, { status: 400 })
   }
-
   try {
-    const { name, email, password } = body as { name: string, email: string, password: string }
+    const { name, email, password } = body.data;
     const existingUser = await prismadb.user.findUnique({
       where: {
         email,

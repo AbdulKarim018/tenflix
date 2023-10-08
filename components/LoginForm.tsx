@@ -47,7 +47,7 @@ export default function LoginForm() {
   return (
     <>
       <Toaster />
-      <div className="relative bg-[url('/login-bg.jpg')] min-h-screen bg-no-repeat bg-center bg-fixed bg-cover ">
+      <div className="relative lg:bg-[url('/login-bg.jpg')] min-h-screen bg-no-repeat bg-center bg-fixed bg-cover">
         <div className="bg-black bg-opacity-80 min-h-screen w-full">
           <Logo
             className='absolute max-md:w-[150px] md:left-8 max-md:-top-8 left-2 top-2 md:w-[200px] cursor-pointer'

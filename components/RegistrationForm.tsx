@@ -9,13 +9,15 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { RegistrationSchema, TRegistrationSchema } from '@/lib/zodTypes'
 
-export type RegistrationFormValues = {
-  name: string,
-  email: string,
-  password: string,
-}
+// export type RegistrationFormValues = {
+//   name: string,
+//   email: string,
+//   password: string,
+// }
 
 
 
@@ -23,22 +25,25 @@ const lilita_one = Lilita_One({ weight: "400", subsets: ['latin'] })
 
 export default function RegisterationForm() {
   const router = useRouter()
-
-
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<RegistrationFormValues>();
-  const onSubmit = async (data: FieldValues) => {
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm<TRegistrationSchema>({
+    resolver: zodResolver(RegistrationSchema),
+  });
+  const onSubmit = async (data: TRegistrationSchema) => {
     try {
+      // await new Promise((resolve) => setTimeout(resolve, 2000))
       await axios.post('/api/register', {
         data
-      }).then(() => {
-        toast.success("Registration Successful!");
-        setTimeout(() => {
-          router.push('/login')
-        }, 800);
-      }).catch((error) => {
-        const msg = error.response.data.msg;
-        toast.error(msg);
       })
+        .then(() => {
+          toast.success("Registration Successful!");
+          setTimeout(() => {
+            router.push('/login')
+          }, 800);
+          reset();
+        }).catch((error) => {
+          const msg = error.response.data.msg;
+          toast.error(msg);
+        })
     } catch (error) {
       toast.error("Something Bad Happened!");
       console.log(error);
@@ -71,7 +76,7 @@ export default function RegisterationForm() {
   return (
     <>
       <Toaster />
-      <div className="relative bg-[url('/login-bg.jpg')] min-h-screen bg-no-repeat bg-center bg-fixed bg-cover ">
+      <div className="relative lg:bg-[url('/login-bg.jpg')] min-h-screen bg-no-repeat bg-center bg-fixed bg-cover">
         <div className="bg-black bg-opacity-80 min-h-screen w-full">
           <Logo
             className='absolute max-md:w-[150px] md:left-8 max-md:-top-8 md:w-[200px] cursor-pointer'
@@ -85,46 +90,22 @@ export default function RegisterationForm() {
               <Label htmlFor='name'>Name</Label>
               <Input type="text" id='name'
                 className='bg-slate-600 w-[18rem]'
-                {...register("name", {
-                  required: { value: true, message: "Name is Required!" },
-                  minLength: {
-                    value: 5,
-                    message: "Name must be atleast 5 Characters Long!"
-                  },
-                  maxLength: {
-                    value: 25,
-                    message: "Name cannot be longer than 25 Characters!"
-                  }
-                })} />
+                {...register("name")}
+              />
               {errors.name && <p className='text-red-600 text-sm p-0 m-0'>{errors.name.message?.toString()}</p>}
               <Label htmlFor='email'>Email</Label>
               <Input type="email" id='email'
                 className='bg-slate-600 w-[18rem]'
-                {...register("email", {
-                  required: {
-                    value: true,
-                    message: "Email is Required!"
-                  },
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Email is not Valid!"
-                  },
-                })} />
+                {...register("email")}
+              />
               {errors.email && <p className='text-red-600 text-sm p-0 m-0'>{errors.email.message?.toString()}</p>}
               <Label htmlFor='password'>Password</Label>
               <Input type="password" id='password'
                 className='bg-slate-600 w-[18rem]'
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Passowrd is Required!"
-                  }, minLength: {
-                    value: 8,
-                    message: "Password Must Be atleast 8 Characters Long!"
-                  }
-                })} />
+                {...register("password")}
+              />
               {errors.password && <p className='text-red-600 text-sm p-0 m-0'>{errors.password.message?.toString()}</p>}
-              <Button disabled={isSubmitting} type='submit' variant='destructive' className='mt-8'>{isSubmitting ? (
+              <Button disabled={isSubmitting || isSubmitSuccessful} type='submit' variant='destructive' className='mt-8'>{isSubmitting ? (
                 <AiOutlineLoading className="animate-spin duration-500" size={25} />
               ) : 'Sign Up'}</Button>
               <div className="flex">
