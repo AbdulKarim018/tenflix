@@ -15,7 +15,7 @@ const MovieList = () => {
     <>
       <Toaster />
       <section className='p-4'>
-        <h2 className='text-2xl text-bold py-5 px-4 font-bold cursor-default'>
+        <h2 className='text-2xl text-bold py-5 px-4 font-bold pointer-events-none'>
           New on <span className='font-semibold text-red-700'>TENFLIX</span>
         </h2>
         {isLoading && <div className='animate-none flex justify-center w-full h-56 mt-6'><AiOutlineLoading className='animate-spin w-12 h-12 duration-500' /></div>}
