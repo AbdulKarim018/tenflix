@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           },
           include: {
             Profiles: true,
-          },
+          }
         })
         if (!user || !user.hashedPassword) {
           throw new Error("Email Does Not Exist!");
@@ -58,6 +58,7 @@ export const authOptions: NextAuthOptions = {
           hashedPassword: user.hashedPassword,
           emailVerifiedAt: user.emailVerifiedAt,
           Profiles: user.Profiles,
+          favoriteIds: user.favoriteIds,
         };
       };
       return token;
@@ -72,6 +73,7 @@ export const authOptions: NextAuthOptions = {
           hashedPassowrd: token.hashedPassword,
           emailVerifiedAt: token.emailVerifiedAt,
           Profiles: token.Profiles,
+          favoriteIds: token.favoriteIds,
         }
       }
     },

@@ -1,7 +1,8 @@
 "use client"
 import { Movie } from '@prisma/client'
 import React from 'react'
-import { BsFillBookmarkPlusFill, BsFillPlayFill } from 'react-icons/bs'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { BsFillPlayFill } from 'react-icons/bs'
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
@@ -20,24 +21,26 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
       <div className="
         absolute transition bg-slate-700
         rounded-md overflow-hidden cursor-pointer
-        lg:-translate-y-[15vw] -translate-y-[38vw]
+        lg:-translate-y-[18vw] -translate-y-[44vw]
         scale-0 group-hover:scale-100 duration-300
-        lg:h-[15vw] h-[38vw] w-full
+        lg:h-[18vw] h-[44vw] w-full
         ">
         <img src={movie.thumbnailUrl} alt={movie.title} className="
         lg:h-[8vw] h-[20vw] w-full object-cover
         " />
         <div className="flex justify-between">
-          <p className='font-semibold text-xs lg:text-base p-1 lg:p-2 pointer-events-none'>{movie.title}</p>
+          <p className='font-semibold text-sm lg:text-lg p-1 line-clamp-2 pointer-events-none'>{movie.title}</p>
           <div className="flex gap-1 p-1">
             <div className="
-          border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
-          "><BsFillBookmarkPlusFill className="w-3 h-3 lg:w-4 lg:h-4" /></div>
+          border-[1px] lg:border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
+          "><AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" /></div>
             <div className="
-          border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
-          "><BsFillPlayFill className="w-3 h-3 lg:w-4 lg:h-4" /></div>
+          border-[1px] lg:border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
+          "><BsFillPlayFill className="w-4 h-4 lg:w-7 lg:h-7" /></div>
           </div>
         </div>
+        <p className="text-green-400 text-xs lg:text-base p-1 leading-3">{movie.genre}</p>
+        <p className="text-green-400 text-xs lg:text-base p-1 leading-3">{movie.duration}</p>
       </div>
     </div>
   )

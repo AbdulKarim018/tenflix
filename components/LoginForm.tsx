@@ -19,7 +19,7 @@ export default function LoginForm() {
   const { data: session } = useSession();
 
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm();
   const onSubmit = async (data: FieldValues) => {
     const login = await signIn('credentials', {
       ...data, redirect: false, callbackUrl: '/profiles'
@@ -88,7 +88,7 @@ export default function LoginForm() {
                 })}
               />
               {errors.password && <p className='text-red-600 text-sm p-0 m-0'>{errors.password.message?.toString()}</p>}
-              <Button disabled={isSubmitting} type='submit' variant='destructive' className='mt-10'>{isSubmitting ? (
+              <Button disabled={isSubmitting || isSubmitSuccessful} type='submit' variant='destructive' className='mt-10'>{isSubmitting || isSubmitSuccessful ? (
                 <AiOutlineLoading className="animate-spin duration-500" size={25} />
               ) : 'Sign In'}</Button>
               <div className="flex">

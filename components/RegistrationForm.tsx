@@ -77,7 +77,7 @@ export default function RegisterationForm() {
     <>
       <Toaster />
       <div className="relative lg:bg-[url('/login-bg.jpg')] min-h-screen bg-no-repeat bg-center bg-fixed bg-cover">
-        <div className="bg-black bg-opacity-80 min-h-screen w-full">
+        <div className="bg-black lg:bg-opacity-80 min-h-screen w-full">
           <Logo
             className='absolute max-md:w-[150px] md:left-8 max-md:-top-8 md:w-[200px] cursor-pointer'
             onClick={() => {
