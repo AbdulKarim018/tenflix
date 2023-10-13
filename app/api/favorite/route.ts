@@ -78,7 +78,7 @@ export const DELETE = async (req: Request) => {
       }
     },
   });
-  console.log(updatedFavoriteIds);
+  // console.log(updatedFavoriteIds);
 
   return NextResponse.json(updatedFavoriteIds);
 }
