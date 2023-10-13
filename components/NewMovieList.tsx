@@ -7,7 +7,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { AiOutlineLoading } from 'react-icons/ai'
 import MovieCard from './MovieCard'
 
-const MovieList = () => {
+const NewMovieList = () => {
 
   const { data: movies, error, isLoading }: { data: Movie[], error: any, isLoading: boolean, } = useLatestMovies();
 
@@ -30,4 +30,4 @@ const MovieList = () => {
   )
 }
 
-export default MovieList
+export default NewMovieList;

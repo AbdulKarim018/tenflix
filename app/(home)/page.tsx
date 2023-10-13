@@ -1,6 +1,7 @@
 import BillBoard from "@/components/BillBoard";
 import DeleteUserButton from "@/components/DeleteUserButton";
-import MovieList from "@/components/MovieList";
+import NewMovieList from "@/components/NewMovieList";
+import MyList from "@/components/MyList";
 import Navbar from "@/components/Navbar";
 
 
@@ -13,7 +14,8 @@ export default async function Home() {
     <>
       <Navbar />
       <BillBoard />
-      <MovieList />
+      <NewMovieList />
+      <MyList />
       <DeleteUserButton />
     </>
   )

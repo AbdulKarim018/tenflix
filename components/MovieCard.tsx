@@ -1,26 +1,26 @@
 "use client"
 import { Movie } from '@prisma/client'
 import React from 'react'
-import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillPlayFill } from 'react-icons/bs'
+import FavoriteButton from './FavoriteButton'
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
     <div className="group rounded-md shadow-lg
            bg-slate-900/20 backdrop:bg-black
            transition relative
+           w-full lg:w-[18rem] h-[32vw] lg:h-[12vw]
            "
       key={movie.id}>
       <img src={movie.thumbnailUrl} alt={movie.title}
         className='w-[50vw] h-[32vw] lg:h-[12vw]
          object-cover
          transition duration-300
-         cursor-pointer
          group-hover:opacity-0
          ' />
       <div className="
-        absolute transition bg-slate-700
-        rounded-md overflow-hidden cursor-pointer
+        absolute bg-slate-700
+        rounded-md overflow-hidden transition
         lg:-translate-y-[18vw] -translate-y-[44vw]
         scale-0 group-hover:scale-100 duration-300
         lg:h-[18vw] h-[44vw] w-full
@@ -31,16 +31,14 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         <div className="flex justify-between">
           <p className='font-semibold text-sm lg:text-lg p-1 line-clamp-2 pointer-events-none'>{movie.title}</p>
           <div className="flex gap-1 p-1">
-            <div className="
-          border-[1px] lg:border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
-          "><AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" /></div>
+            <FavoriteButton movieId={movie.id} />
             <div className="
           border-[1px] lg:border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
           "><BsFillPlayFill className="w-4 h-4 lg:w-7 lg:h-7" /></div>
           </div>
         </div>
-        <p className="text-green-400 text-xs lg:text-base p-1 leading-3">{movie.genre}</p>
-        <p className="text-green-400 text-xs lg:text-base p-1 leading-3">{movie.duration}</p>
+        <p className="text-green-400 text-xs lg:text-base p-1 leading-3 pointer-events-none">{movie.genre}</p>
+        <p className="text-green-400 text-xs lg:text-base p-1 leading-3 pointer-events-none">{movie.duration}</p>
       </div>
     </div>
   )

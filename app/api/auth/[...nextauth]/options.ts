@@ -57,8 +57,8 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           hashedPassword: user.hashedPassword,
           emailVerifiedAt: user.emailVerifiedAt,
-          Profiles: user.Profiles,
           favoriteIds: user.favoriteIds,
+          Profiles: user.Profiles,
         };
       };
       return token;
@@ -72,8 +72,8 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
           hashedPassowrd: token.hashedPassword,
           emailVerifiedAt: token.emailVerifiedAt,
-          Profiles: token.Profiles,
           favoriteIds: token.favoriteIds,
+          Profiles: token.Profiles,
         }
       }
     },
