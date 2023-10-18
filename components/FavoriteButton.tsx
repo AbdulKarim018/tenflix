@@ -50,29 +50,14 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       {status === 'authenticated' && <div onClick={toggleFavorite} className="border-[1px] lg:border-2 cursor-pointer border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition">
         {isFavorite ? <AiOutlineMinus className="w-3 h-3 lg:w-8 lg:h-8" /> : <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />}
       </div>}
-      {status === 'unauthenticated' && window.innerHeight < 720 &&
-        (
-          <Popover>
-            <PopoverTrigger className="border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition">
-              <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />
-            </PopoverTrigger>
-            <PopoverContent>Login to add Movies To your List.</PopoverContent>
-          </Popover>
-        )}
-      {status === 'unauthenticated' && window.innerHeight > 720 &&
-        (
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition">
-                <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />
-              </TooltipTrigger>
-              <TooltipContent className='w-32 h-20'>
-                <p>Login to add Movies To your List.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
-        )}
+      {status === 'unauthenticated' && (
+        <Popover>
+          <PopoverTrigger className="border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition">
+            <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />
+          </PopoverTrigger>
+          <PopoverContent>Login to add Movies To your List.</PopoverContent>
+        </Popover>
+      )}
     </>
   )
 }
