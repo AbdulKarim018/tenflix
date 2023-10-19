@@ -43,7 +43,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     });
     mutateCurrentUser();
     mutateFavorites();
-  }, [isFavorite, movieId, currentUser, favoriteMovies, mutateCurrentUser, mutateFavorites])
+  }, [isFavorite, movieId, mutateCurrentUser, mutateFavorites])
 
   return (
     <>
@@ -52,7 +52,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       </div>}
       {status === 'unauthenticated' && (
         <Popover>
-          <PopoverTrigger className="border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition">
+          <PopoverTrigger className="group border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition">
             <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />
           </PopoverTrigger>
           <PopoverContent>Login to add Movies To your List.</PopoverContent>

@@ -1,8 +1,8 @@
 "use client"
 import { Movie } from '@prisma/client'
 import React from 'react'
-import { BsFillPlayFill } from 'react-icons/bs'
 import FavoriteButton from './FavoriteButton'
+import PlayButton from './PlayButton'
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
@@ -32,9 +32,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
           <p className='font-semibold text-sm lg:text-lg p-1 line-clamp-2 pointer-events-none'>{movie.title}</p>
           <div className="flex gap-1 p-1">
             <FavoriteButton movieId={movie.id} />
-            <div className="
-          border-[1px] lg:border-2 border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition
-          "><BsFillPlayFill className="w-4 h-4 lg:w-7 lg:h-7" /></div>
+            <PlayButton movieId={movie.id} />
           </div>
         </div>
         <p className="text-green-400 text-xs lg:text-base p-1 leading-3 pointer-events-none">{movie.genre}</p>
