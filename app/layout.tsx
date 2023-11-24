@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <AuthProvider>
         <body className={`${inter.className} bg-black`}>
-          <ThemeProvider defaultTheme='dark' attribute="class">
+          <ThemeProvider defaultTheme='dark' forcedTheme='dark' attribute="class">
             <ProfileContextProvider>
               {children}
             </ProfileContextProvider>

@@ -16,14 +16,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { cn } from '@/lib/utils'
 
 
 
 type FavoriteButtonProps = {
-  movieId: string
+  movieId: string;
+  className?: string;
 }
 
-const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
+const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId, className }) => {
   const { status } = useSession();
   const { data: favoriteMovies, mutate: mutateFavorites }: { data: Movie[], mutate: KeyedMutator<any> } = useFavorites();
   const { data: currentUser, mutate: mutateCurrentUser }: { data: User, mutate: KeyedMutator<any> } = useCurrentUser();
@@ -47,12 +49,12 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
 
   return (
     <>
-      {status === 'authenticated' && <div onClick={toggleFavorite} className="border-[1px] lg:border-2 cursor-pointer border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition">
+      {status === 'authenticated' && <div onClick={toggleFavorite} className={cn("border-[1px] lg:border-2 cursor-pointer border-white lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center hover:text-black hover:bg-white transition", className)}>
         {isFavorite ? <AiOutlineMinus className="w-3 h-3 lg:w-8 lg:h-8" /> : <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />}
       </div>}
       {status === 'unauthenticated' && (
         <Popover>
-          <PopoverTrigger className="group border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition">
+          <PopoverTrigger className={cn("group border-[1px] lg:border-2 cursor-default border-slate-400 text-slate-400 lg:w-10 lg:h-10 w-6 h-6 rounded-full flex items-center justify-center transition", className)}>
             <AiOutlinePlus className="w-3 h-3 lg:w-8 lg:h-8" />
           </PopoverTrigger>
           <PopoverContent>Login to add Movies To your List.</PopoverContent>

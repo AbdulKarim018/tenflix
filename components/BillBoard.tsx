@@ -1,12 +1,22 @@
 "use client"
 
-import { Montserrat } from 'next/font/google'
+import { Lilita_One, Montserrat } from 'next/font/google'
 import useRandomMovie from '@/hooks/useRandomMovie';
 import toast, { Toaster } from 'react-hot-toast';
 import { BounceLoader } from 'react-spinners';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { Button } from './ui/button';
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
+import PlayButton from './PlayButton';
+import FavoriteButton from './FavoriteButton';
+
 const montserrat = Montserrat({
   subsets: ['latin'],
+});
+
+const lilita_One = Lilita_One({
+  subsets: ['latin'],
+  weight: '400',
 });
 
 const BillBoard = () => {
@@ -37,13 +47,21 @@ const BillBoard = () => {
               <div className="text-white text-sm">{movie?.description}</div>
             </div>
             <div className="mt-10 flex gap-4">
-              <button className="flex items-center transition
-           bg-slate-600 hover:bg-slate-800 border-2 border-transparent hover:border-white
-            cursor-pointer rounded-lg
-            lg:h-[3rem] lg:p-4 p-4 h-10 lg:text-base text-sm">
-                More Info
-                <span className="ml-2"><AiOutlineInfoCircle size={20} /></span>
-              </button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant='outline'>More Info <span className="ml-2"><AiOutlineInfoCircle size={20} /></span></Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <div className="flex flex-col justify-start h-full">
+                    <div className={`text-white text-4xl font-bold mb-4 ${lilita_One.className}`}>{movie?.title}</div>
+                    <div className="text-white text-sm">{movie?.description}</div>
+                    <div className="mt-10 flex items-center gap-4">
+                      <PlayButton movieId={movie.id} />
+                      <FavoriteButton movieId={movie.id} />
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </>}
