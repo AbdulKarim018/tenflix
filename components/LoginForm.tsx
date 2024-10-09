@@ -88,7 +88,7 @@ export default function LoginForm() {
                 })}
               />
               {errors.password && <p className='text-red-600 text-sm p-0 m-0'>{errors.password.message?.toString()}</p>}
-              <Button disabled={isSubmitting || isSubmitSuccessful} type='submit' variant='destructive' className='mt-10'>{isSubmitting || isSubmitSuccessful ? (
+              <Button disabled={isSubmitting || isSubmitSuccessful} type='submit' variant='destructive' className='mt-10'>{isSubmitting ? (
                 <AiOutlineLoading className="animate-spin duration-500" size={25} />
               ) : 'Sign In'}</Button>
               <div className="flex">
